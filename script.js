@@ -1,14 +1,12 @@
 const textInput = document.querySelector('#text');
 const enterButton = document.querySelector('#enter');
 const list = document.querySelector('#list');
-const deleteButton = '';
 
 function createListItem() {
     let itemNode = document.createElement('li');
-    let deleteButton = document.createElement('input');
-    deleteButton.type = 'button';
-    deleteButton.value = 'delete';
-    let textNode = document.createTextNode(`${textInput.value}`);
+    let deleteButton = document.createElement('button');
+    deleteButton.appendChild(document.createTextNode('delete'));
+    let textNode = document.createTextNode(`${textInput.value} `);
     itemNode.appendChild(textNode);
     itemNode.appendChild(deleteButton);
     if (textInput.value === '') {
@@ -19,7 +17,7 @@ function createListItem() {
 }
 
 function deleteItem() {
-
+    deleteButton.parentElement.remove();
 }
 
 enterButton.addEventListener('click', createListItem);
