@@ -6,6 +6,8 @@ function createListItem() {
     let itemNode = document.createElement('li');
     let deleteButton = document.createElement('button');
     deleteButton.appendChild(document.createTextNode('delete'));
+    deleteButton.classList = 'delete';
+    itemNode.classList = 'listitem';
     let textNode = document.createTextNode(`${textInput.value} `);
     itemNode.appendChild(textNode);
     itemNode.appendChild(deleteButton);
@@ -16,8 +18,21 @@ function createListItem() {
     return list.appendChild(itemNode);
 }
 
-function deleteItem() {
-    deleteButton.parentElement.remove();
+function deleteItem(element) {
+    if (element.target.classList.contains('delete')) {
+        element.target.parentElement.remove();
+    }
+}
+
+function addStrikeThrough(element) {
+    if (element.target.classList.contains('listitem')) {
+        element.target.classList.toggle('finished');
+    }
+}
+
+function handleUlEvent(element) {
+    deleteItem(element);
+    addStrikeThrough(element);
 }
 
 enterButton.addEventListener('click', createListItem);
@@ -26,3 +41,4 @@ textInput.addEventListener('keydown', event => {
         createListItem();
     }
 });
+list.addEventListener('click', handleUlEvent);
