@@ -5,10 +5,14 @@ const list = document.querySelector('#list');
 function createListItem() {
     let itemNode = document.createElement('li');
     let deleteButton = document.createElement('button');
+    let checkbox = document.createElement('input')
+    checkbox.type = 'checkbox';
+    checkbox.classList.add('check');
     deleteButton.appendChild(document.createTextNode('delete'));
     deleteButton.classList = 'delete';
     itemNode.classList = 'listitem';
     let textNode = document.createTextNode(`${textInput.value} `);
+    itemNode.appendChild(checkbox);
     itemNode.appendChild(textNode);
     itemNode.appendChild(deleteButton);
     if (textInput.value === '') {
@@ -25,8 +29,8 @@ function deleteItem(element) {
 }
 
 function addStrikeThrough(element) {
-    if (element.target.classList.contains('listitem')) {
-        element.target.classList.toggle('finished');
+    if (element.target.classList.contains('check')) {
+        element.target.parentElement.classList.toggle('finished')
     }
 }
 

@@ -8,11 +8,16 @@ h1 {
 }
 
 li {
+    width: fit-content;
+    margin: auto;
     color: white;
+    font-size: x-large;
+    padding: 5px;
 }
 
 ul {
     list-style-type: none;
+    text-align: center;
 }
 
 .finished {
