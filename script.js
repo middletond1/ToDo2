@@ -1,25 +1,37 @@
 const textInput = document.querySelector('#text');
 const enterButton = document.querySelector('#enter');
-const list = document.querySelector('#list');
+
+function createDeleteButton() {
+    const deleteButton = document.createElement('button');
+    deleteButton.classList = 'delete';
+    deleteButton.appendChild(document.createTextNode('delete'));
+    return deleteButton;
+}
 
 function createListItem() {
-    let itemNode = document.createElement('li');
-    let deleteButton = document.createElement('button');
-    let checkbox = document.createElement('input')
+    const item = document.createElement('li');
+    item.classList = 'listitem';
+    return item;
+}
+
+function createCheckBox() {
+    const checkbox = document.createElement('input')
     checkbox.type = 'checkbox';
     checkbox.classList.add('check');
-    deleteButton.appendChild(document.createTextNode('delete'));
-    deleteButton.classList = 'delete';
-    itemNode.classList = 'listitem';
-    let textNode = document.createTextNode(`${textInput.value} `);
-    itemNode.appendChild(checkbox);
-    itemNode.appendChild(textNode);
-    itemNode.appendChild(deleteButton);
+    return checkbox;
+}
+
+function drawToDo() {
     if (textInput.value === '') {
         return;
-    }
+    };
+    const item = createListItem();
+    const list = document.querySelector('#list');
+    item.appendChild(createCheckBox());
+    item.appendChild(document.createTextNode(`${textInput.value} `));
+    item.appendChild(createDeleteButton());
     textInput.value = '';
-    return list.appendChild(itemNode);
+    list.appendChild(item);
 }
 
 function deleteItem(element) {
@@ -39,10 +51,10 @@ function handleUlEvent(element) {
     addStrikeThrough(element);
 }
 
-enterButton.addEventListener('click', createListItem);
+enterButton.addEventListener('click', drawToDo);
 textInput.addEventListener('keydown', event => {
     if (event.keyCode === 13) {
-        createListItem();
+        drawToDo();
     }
 });
 list.addEventListener('click', handleUlEvent);
