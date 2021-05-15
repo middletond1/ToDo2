@@ -8,6 +8,12 @@ function createDeleteButton() {
     return deleteButton;
 }
 
+function deleteItem(element) {
+    if (element.target.classList.contains('delete')) {
+        element.target.parentElement.remove();
+    }
+}
+
 function createListItem() {
     const item = document.createElement('li');
     item.classList = 'listitem';
@@ -21,6 +27,17 @@ function createCheckBox() {
     return checkbox;
 }
 
+function addStrikeThrough(element) {
+    if (element.target.classList.contains('check')) {
+        element.target.parentElement.classList.toggle('finished')
+    }
+}
+
+function handleUlEvent(element) {
+    deleteItem(element);
+    addStrikeThrough(element);
+}
+
 function drawToDo() {
     if (textInput.value === '') {
         return;
@@ -32,23 +49,6 @@ function drawToDo() {
     item.appendChild(createDeleteButton());
     textInput.value = '';
     list.appendChild(item);
-}
-
-function deleteItem(element) {
-    if (element.target.classList.contains('delete')) {
-        element.target.parentElement.remove();
-    }
-}
-
-function addStrikeThrough(element) {
-    if (element.target.classList.contains('check')) {
-        element.target.parentElement.classList.toggle('finished')
-    }
-}
-
-function handleUlEvent(element) {
-    deleteItem(element);
-    addStrikeThrough(element);
 }
 
 enterButton.addEventListener('click', drawToDo);
